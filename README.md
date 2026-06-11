@@ -1,10 +1,6 @@
-**This is the template README. Please update this with project specific content.**
-
 # sdec-threadinfo-api-test
+sdec-theadinfo-api API tests.
 
-<SERVICE_NAME> API tests.
-
-## Pre-requisites
 
 ### Services
 
@@ -14,10 +10,10 @@ Start Mongo Docker container as follows:
 docker run --rm -d -p 27017:27017 --name mongo percona/percona-server-mongodb:6.0
 ```
 
-Start `<SERVICE_MANAGER_PROFILE>` services as follows:
+Start `SDEC API Backend` services as follows:
 
 ```bash
-sm2 --start <SERVICE_MANAGER_PROFILE>
+sm2 --start SDEC_THREAD_INFO_API
 ```
 
 ## Tests
