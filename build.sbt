@@ -6,7 +6,7 @@ val scalafixSettings = Seq(
 lazy val root = (project in file("."))
   .settings(
     name := "sdec-threadinfo-api-test",
-    version := "0.1.0",
+    version := "0.10.0",
     scalaVersion := "3.3.7",
     scalacOptions ++= Seq("-feature"),
     libraryDependencies ++= Dependencies.test,
