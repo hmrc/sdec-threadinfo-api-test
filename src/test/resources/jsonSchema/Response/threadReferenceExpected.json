@@ -1,0 +1,13 @@
+{
+  "id": "123456ABCDEF",
+  "threadReference": "THREAD-001",
+  "status": "Active",
+  "createdTimeStamp": "2026-07-06T10:40:07.18586",
+  "lastUpdatedTimeStamp": "2026-07-08T07:40:07.185886",
+  "threadExpiryDate": "2026-08-05",
+  "associatedCaseReference": "CASE-001"
+}
+
+
+
+
