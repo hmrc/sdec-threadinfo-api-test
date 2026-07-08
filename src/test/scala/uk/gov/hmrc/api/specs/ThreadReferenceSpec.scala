@@ -37,12 +37,12 @@ class ThreadReferenceSpec extends AnyFeatureSpec with Matchers with GivenWhenThe
 
       println(s"Actual response body for 200 response: ${response.body()}")
 
-      val expectedJson = expectedThreadReferenceJson()
+      val expectedJson           = expectedThreadReferenceJson()
       val normalizedExpectedJson = stripDynamicTimestamps(normalizeJsonString(expectedJson))
-      val normalizedActualJson = normalizeThreadReferenceResponse(response.body())
+      val normalizedActualJson   = normalizeThreadReferenceResponse(response.body())
 
       response.statusCode() shouldBe 200
-      normalizedActualJson shouldBe normalizedExpectedJson
+      normalizedActualJson  shouldBe normalizedExpectedJson
 
     }
 
@@ -56,9 +56,9 @@ class ThreadReferenceSpec extends AnyFeatureSpec with Matchers with GivenWhenThe
       Then("The user should receive a 400 validation error")
       println(s"Actual response body for 400 response: ${response.body()}")
 
-      response.statusCode() shouldBe 400
+      response.statusCode()                shouldBe 400
       normalizeResponseJson(response.body()) should contain
-       """{"message":"Thread reference [999] must be exactly 12 characters long and contain only A-Z and 0-9"}"""
+      """{"message":"Thread reference [999] must be exactly 12 characters long and contain only A-Z and 0-9"}"""
     }
 
     Scenario("Non-existent thread reference returns 404 Not Found") {
@@ -71,9 +71,9 @@ class ThreadReferenceSpec extends AnyFeatureSpec with Matchers with GivenWhenThe
       Then("The user should receive a 404 not found error")
       println(s"Actual response body for 404 response: ${response.body()}")
 
-      response.statusCode() shouldBe 404
+      response.statusCode()                shouldBe 404
       normalizeResponseJson(response.body()) should contain
-        """{"message":"Thread reference [AAAAAAAAAAAA] not found"}"""
+      """{"message":"Thread reference [AAAAAAAAAAAA] not found"}"""
     }
   }
 }

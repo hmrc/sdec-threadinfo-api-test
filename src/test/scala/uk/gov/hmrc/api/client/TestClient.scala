@@ -40,7 +40,4 @@ object TestClient extends HttpClientSupport {
 
   def getThreadReference(threadId: String): HttpResponse[String] =
     get(threadReferenceUrl(threadId))
- }
-
-
-
+}
