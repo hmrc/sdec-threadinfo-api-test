@@ -2,9 +2,9 @@
   "id": "123456ABCDEF",
   "threadReference": "THREAD-001",
   "status": "Active",
-  "createdTimeStamp": "2026-07-06T10:40:07.18586",
-  "lastUpdatedTimeStamp": "2026-07-08T07:40:07.185886",
-  "threadExpiryDate": "2026-08-10",
+  "createdTimeStamp": "CREATED_TIMESTAMP__",
+  "lastUpdatedTimeStamp": "LAST_UPDATED_TIMESTAMP",
+  "threadExpiryDate": "THREAD_EXPIRY_DATE",
   "associatedCaseReference": "CASE-001"
 }
 
