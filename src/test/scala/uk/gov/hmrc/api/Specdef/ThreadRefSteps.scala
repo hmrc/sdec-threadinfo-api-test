@@ -21,10 +21,12 @@ import org.scalatest.matchers.should.Matchers.{convertToStringShouldWrapperForVe
 import uk.gov.hmrc.api.client.TestClient
 
 import java.net.URI
+import java.net.http.{HttpClient, HttpRequest, HttpResponse}
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.net.http.{HttpClient, HttpRequest, HttpResponse}
+import java.time.format.DateTimeFormatter
+import java.time.{LocalDate, LocalDateTime, format}
 
 trait ThreadRefSteps {
 
@@ -55,8 +57,22 @@ trait ThreadRefSteps {
       .replaceAll("""\{,""", "{")
       .trim
 
+  private val timestampFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
+  private val dateFormatter      = DateTimeFormatter.ISO_LOCAL_DATE
+
+  private def renderDynamicExpectedJson(json: String): String = {
+    val createdTimestamp = LocalDateTime.now().minusDays(2).format(timestampFormatter)
+    val updatedTimestamp = LocalDateTime.now().minusHours(3).format(timestampFormatter)
+    val expiryDate       = LocalDate.now().plusDays(28).format(dateFormatter)
+
+    json
+      .replace("CREATED_TIMESTAMP", createdTimestamp)
+      .replace("LAST_UPDATED_TIMESTAMP", updatedTimestamp)
+      .replace("THREAD_EXPIRY_DATE", expiryDate)
+  }
+
   protected def expectedThreadReferenceJson(): String =
-    loadResource("/jsonSchema/Response/threadReferenceExpected.json")
+    renderDynamicExpectedJson(loadResource("/jsonSchema/Response/threadReferenceExpected.json"))
 
   protected def sendThreadReferenceRequest(threadId: String): HttpResponse[String] = {
     // val requestUrl = s"http://localhost:4001/sdec-threadinfo-api/thread-reference/$threadId"
