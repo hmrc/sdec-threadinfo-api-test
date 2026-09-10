@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.api.client
 
-
 import play.api.Logging
 import play.api.libs.json.Json
 import play.api.libs.ws.JsonBodyWritables.writeableOf_JsValue
@@ -28,7 +27,7 @@ import uk.gov.hmrc.http.client.HttpClientV2
 import java.net.URI
 import scala.concurrent.{ExecutionContext, Future}
 
-class AuthenticationService(client: HttpClientV2)(using ec: ExecutionContext) extends  Logging{
+class AuthenticationService(client: HttpClientV2)(using ec: ExecutionContext) extends Logging {
 
   private val authUrl: String = TestConfiguration.url("authStub")
 
