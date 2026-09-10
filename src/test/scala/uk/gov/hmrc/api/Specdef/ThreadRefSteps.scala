@@ -16,19 +16,16 @@
 
 package uk.gov.hmrc.api.Specdef
 
-import org.scalatest.matchers.must.Matchers.include
-import org.scalatest.matchers.should.Matchers.{convertToStringShouldWrapperForVerb, shouldBe}
+import play.api.Logging
 import uk.gov.hmrc.api.client.TestClient
-
 import java.net.URI
 import java.net.http.{HttpClient, HttpRequest, HttpResponse}
 import java.nio.charset.StandardCharsets
-import java.nio.file.Files
-import java.nio.file.Paths
+import java.nio.file.{Files, Paths}
 import java.time.format.DateTimeFormatter
-import java.time.{LocalDate, LocalDateTime, format}
+import java.time.{LocalDate, LocalDateTime}
 
-trait ThreadRefSteps {
+trait ThreadRefSteps extends Logging {
 
   protected def loadResource(path: String): String = {
     val uri = getClass.getResource(path).toURI
@@ -74,11 +71,15 @@ trait ThreadRefSteps {
   protected def expectedThreadReferenceJson(): String =
     renderDynamicExpectedJson(loadResource("/jsonSchema/Response/threadReferenceExpected.json"))
 
-  protected def sendThreadReferenceRequest(threadId: String): HttpResponse[String] = {
-    // val requestUrl = s"http://localhost:4001/sdec-threadinfo-api/thread-reference/$threadId"
+  protected def sendThreadReferenceRequest(threadId: String, bearerToken: String): HttpResponse[String] = {
+
     val requestUrl = TestClient.threadReferenceUrl(threadId)
     val client     = HttpClient.newHttpClient()
-    val request    = HttpRequest.newBuilder(URI.create(requestUrl)).GET().build()
+    val request    = HttpRequest
+      .newBuilder(URI.create(requestUrl))
+      .header("Authorization", s"Bearer $bearerToken")
+      .GET()
+      .build()
     client.send(request, HttpResponse.BodyHandlers.ofString())
   }
 

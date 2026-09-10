@@ -16,12 +16,11 @@
 
 package uk.gov.hmrc.api.specs
 
-import org.scalatest.GivenWhenThen
-import uk.gov.hmrc.api.Specdef.ThreadRefSteps
 import org.scalatest.featurespec.AnyFeatureSpec
-import org.scalatest.matchers.should.Matchers
+import uk.gov.hmrc.api.Specdef.ThreadRefSteps
 
-class ThreadReferenceSpec extends AnyFeatureSpec with Matchers with GivenWhenThen with ThreadRefSteps {
+class ThreadReferenceSpec extends BaseSpec with ThreadRefSteps {
+  val jwtToken = authenticationService.getBearerToken()
 
   Feature("Thread Reference number Validation") {
 
@@ -30,8 +29,10 @@ class ThreadReferenceSpec extends AnyFeatureSpec with Matchers with GivenWhenThe
       Given("The user makes a GET api call to the correct endpoint ")
 
       When("The user queries a 12 digit Thread Reference number")
+      val bearerToken =
+        authenticationService.getBearerToken().futureValue
 
-      val response = sendThreadReferenceRequest("123456ABCDEF")
+      val response = sendThreadReferenceRequest("123456ABCDEF", bearerToken)
 
       Then("The user should be able to see the expected response")
 
@@ -50,8 +51,10 @@ class ThreadReferenceSpec extends AnyFeatureSpec with Matchers with GivenWhenThe
 
       Given("The user makes a GET api call to the correct endpoint")
       When("The user queries an invalid thread reference")
+      val bearerToken =
+        authenticationService.getBearerToken().futureValue
 
-      val response = sendThreadReferenceRequest("999")
+      val response = sendThreadReferenceRequest("999", bearerToken)
 
       Then("The user should receive a 400 validation error")
       println(s"Actual response body for 400 response: ${response.body()}")
@@ -65,8 +68,10 @@ class ThreadReferenceSpec extends AnyFeatureSpec with Matchers with GivenWhenThe
 
       Given("The user makes a GET api call to the correct endpoint")
       When("The user queries a thread reference that does not exist")
+      val bearerToken =
+        authenticationService.getBearerToken().futureValue
 
-      val response = sendThreadReferenceRequest("AAAAAAAAAAAA")
+      val response = sendThreadReferenceRequest("AAAAAAAAAAAA", bearerToken)
 
       Then("The user should receive a 404 not found error")
       println(s"Actual response body for 404 response: ${response.body()}")
