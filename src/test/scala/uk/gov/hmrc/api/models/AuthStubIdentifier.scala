@@ -19,7 +19,7 @@ package uk.gov.hmrc.api.models
 import play.api.libs.json.{Json, OFormat}
 
 final case class AuthStubIdentifier(
-  key: String,
+  key:   String,
   value: String
 )
 

@@ -19,11 +19,11 @@ package uk.gov.hmrc.api.models
 import play.api.libs.json.{Json, OFormat}
 
 final case class AuthStubRequest(
-  credId: String = "test-cred-id",
-  affinityGroup: String = "Individual",
-  confidenceLevel: Int = 200,
+  credId:             String = "test-cred-id",
+  affinityGroup:      String = "Individual",
+  confidenceLevel:    Int = 200,
   credentialStrength: String = "strong",
-  enrolments: Seq[AuthStubEnrolment] = Seq(
+  enrolments:         Seq[AuthStubEnrolment] = Seq(
     AuthStubEnrolment(
       key = "ChildBenefit",
       identifiers = Seq(
