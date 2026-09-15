@@ -19,9 +19,9 @@ package uk.gov.hmrc.api.models
 import play.api.libs.json.{Json, OFormat}
 
 case class AuthStubEnrolment(
-  key: String,
+  key:         String,
   identifiers: Seq[AuthStubIdentifier],
-  state: String = "Activated"
+  state:       String = "Activated"
 )
 
 object AuthStubEnrolment {

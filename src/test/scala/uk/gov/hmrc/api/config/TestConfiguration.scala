@@ -39,9 +39,7 @@ object TestConfiguration {
     val portPath =
       s"$base.$serviceName.port"
 
-    if (config.hasPath(portPath))
-      s"$host:${config.getInt(portPath)}$route"
-    else
-      s"$host$route"
+    if config.hasPath(portPath) then s"$host:${config.getInt(portPath)}$route"
+    else s"$host$route"
   }
 }

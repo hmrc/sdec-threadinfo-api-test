@@ -19,8 +19,10 @@ package uk.gov.hmrc.api.specs
 import org.scalatest.featurespec.AnyFeatureSpec
 import uk.gov.hmrc.api.Specdef.ThreadRefSteps
 
+import scala.concurrent.Future
+
 class ThreadReferenceSpec extends BaseSpec with ThreadRefSteps {
-  val jwtToken = authenticationService.getBearerToken()
+  val jwtToken: Future[String] = authenticationService.getBearerToken()
 
   Feature("Thread Reference number Validation") {
 

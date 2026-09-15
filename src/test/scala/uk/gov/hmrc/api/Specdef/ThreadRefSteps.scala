@@ -18,6 +18,7 @@ package uk.gov.hmrc.api.Specdef
 
 import play.api.Logging
 import uk.gov.hmrc.api.client.TestClient
+
 import java.net.URI
 import java.net.http.{HttpClient, HttpRequest, HttpResponse}
 import java.nio.charset.StandardCharsets
@@ -36,11 +37,11 @@ trait ThreadRefSteps extends Logging {
     json.replaceAll("\\s+", "").trim
 
   protected def normalizeResponseJson(response: String): String = {
-    val trimmed   = response.trim
-    val unquoted  = if (trimmed.startsWith("\"") && trimmed.endsWith("\"")) {
+    val trimmed  = response.trim
+    val unquoted = if trimmed.startsWith("\"") && trimmed.endsWith("\"") then {
       trimmed.substring(1, trimmed.length - 1)
     } else trimmed
-    val unwrapped = if (unquoted.startsWith("[") && unquoted.endsWith("]")) {
+    val unwrapped = if unquoted.startsWith("[") && unquoted.endsWith("]") then {
       unquoted.substring(1, unquoted.length - 1)
     } else unquoted
     normalizeJsonString(unwrapped)

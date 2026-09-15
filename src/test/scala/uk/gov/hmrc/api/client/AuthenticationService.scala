@@ -21,8 +21,8 @@ import play.api.libs.json.Json
 import play.api.libs.ws.JsonBodyWritables.writeableOf_JsValue
 import uk.gov.hmrc.api.config.TestConfiguration
 import uk.gov.hmrc.api.models.AuthStubRequest
-import uk.gov.hmrc.http.{HeaderCarrier, HttpResponse}
 import uk.gov.hmrc.http.client.HttpClientV2
+import uk.gov.hmrc.http.{HeaderCarrier, HttpResponse}
 
 import java.net.URI
 import scala.concurrent.{ExecutionContext, Future}
